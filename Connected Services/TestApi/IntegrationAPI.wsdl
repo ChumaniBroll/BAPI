@@ -1,0 +1,1550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="IntegrationAPI" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IIntegrationAPI_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:EndorsingSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:SecureConversationToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:BootstrapPolicy>
+                  <wsp:Policy>
+                    <sp:SignedParts>
+                      <sp:Body />
+                      <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+                    </sp:SignedParts>
+                    <sp:EncryptedParts>
+                      <sp:Body />
+                    </sp:EncryptedParts>
+                    <sp:TransportBinding>
+                      <wsp:Policy>
+                        <sp:TransportToken>
+                          <wsp:Policy>
+                            <sp:HttpsToken RequireClientCertificate="false" />
+                          </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                          <wsp:Policy>
+                            <sp:Basic256 />
+                          </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                          <wsp:Policy>
+                            <sp:Strict />
+                          </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp />
+                      </wsp:Policy>
+                    </sp:TransportBinding>
+                    <sp:EndorsingSupportingTokens>
+                      <wsp:Policy>
+                        <sp:SpnegoContextToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                          <wsp:Policy />
+                        </sp:SpnegoContextToken>
+                      </wsp:Policy>
+                    </sp:EndorsingSupportingTokens>
+                    <sp:Wss11>
+                      <wsp:Policy />
+                    </sp:Wss11>
+                    <sp:Trust10>
+                      <wsp:Policy>
+                        <sp:MustSupportIssuedTokens />
+                        <sp:RequireClientEntropy />
+                        <sp:RequireServerEntropy />
+                      </wsp:Policy>
+                    </sp:Trust10>
+                  </wsp:Policy>
+                </sp:BootstrapPolicy>
+              </wsp:Policy>
+            </sp:SecureConversationToken>
+          </wsp:Policy>
+        </sp:EndorsingSupportingTokens>
+        <sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy />
+        </sp:Wss11>
+        <sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust10>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingOwner_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingOwner" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingOwner_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingOwnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingOwners_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingOwners" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingOwners_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingOwnersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingShareOwner_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingShareOwner" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingShareOwner_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingShareOwnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingShareOwners_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingShareOwners" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingShareOwners_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingShareOwnersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveOwnerDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveOwnerDocument" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveOwnerDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveOwnerDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetOwnerDocuments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOwnerDocuments" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetOwnerDocuments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOwnerDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLocales_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocales" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLocales_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLocalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetOwnerDocumentTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOwnerDocumentTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetOwnerDocumentTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOwnerDocumentTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SavePortfolio_InputMessage">
+    <wsdl:part name="parameters" element="tns:SavePortfolio" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SavePortfolio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SavePortfolioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetPortfolios_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPortfolios" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetPortfolios_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPortfoliosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuilding_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuilding" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuilding_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildings" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuilding_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuilding" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuilding_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingDocument" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingDocuments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingDocuments" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingDocuments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingDocumentTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingDocumentTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingDocumentTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingDocumentTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetAdminFees_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdminFees" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetAdminFees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdminFeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBranches_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBranches" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBranches_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBranchesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveIPDType_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveIPDType" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveIPDType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveIPDTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetIPDTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIPDTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetIPDTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIPDTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveIPDSubType_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveIPDSubType" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveIPDSubType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveIPDSubTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetIPDSubTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIPDSubTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetIPDSubTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIPDSubTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveIPDNode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveIPDNode" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveIPDNode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveIPDNodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetIPDNodes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIPDNodes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetIPDNodes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIPDNodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetMunicipalities_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMunicipalities" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetMunicipalities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMunicipalitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveMeterReader_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMeterReader" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveMeterReader_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMeterReaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetMeterReaders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeterReaders" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetMeterReaders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMeterReadersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetTenantInvoiceTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTenantInvoiceTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetTenantInvoiceTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTenantInvoiceTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingTaxIntTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingTaxIntTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingTaxIntTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingTaxIntTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetReportingRegions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportingRegions" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetReportingRegions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportingRegionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetManagingAgents_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetManagingAgents" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetManagingAgents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetManagingAgentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetForexCurrencies_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetForexCurrencies" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetForexCurrencies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetForexCurrenciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingChargeType_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingChargeType" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingChargeType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingChargeTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingChargeTypesAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingChargeTypesAll" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingChargeTypesAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingChargeTypesAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetGlobalAccs_Level1_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlobalAccs_Level1" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetGlobalAccs_Level1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlobalAccs_Level1Response" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetGlobalAccs_Level2_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlobalAccs_Level2" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetGlobalAccs_Level2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlobalAccs_Level2Response" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetGlobalAcc_Descriptions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlobalAcc_Descriptions" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetGlobalAcc_Descriptions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlobalAcc_DescriptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingAccount" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingAcc_GlAccs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingAcc_GlAccs" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingAcc_GlAccs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingAcc_GlAccsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetForexConversionTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetForexConversionTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetForexConversionTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetForexConversionTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetVATIntTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVATIntTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetVATIntTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVATIntTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingSpace_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingSpace" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingSpace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingSpaceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingSpaces_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingSpaces" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingSpaces_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingSpacesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingSpaceDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingSpaceDetail" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveBuildingSpaceDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveBuildingSpaceDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingSpaceDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingSpaceDetails" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetBuildingSpaceDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingSpaceDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetPremisesTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPremisesTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetPremisesTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPremisesTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SavePremises_InputMessage">
+    <wsdl:part name="parameters" element="tns:SavePremises" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SavePremises_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SavePremisesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetPremises_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPremises" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetPremises_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPremisesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetEntranceTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEntranceTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetEntranceTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEntranceTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveEntrance_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveEntrance" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveEntrance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveEntranceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetEntrances_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEntrances" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetEntrances_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEntrancesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseHeader_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseHeader" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseHeader_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseHeaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeases_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeases" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeases_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeasesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveContactDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactDetail" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveContactDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetTitles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTitles" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetTitles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTitlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetContactDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactDetail" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetContactDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveContactAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactAddress" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveContactAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetAddressTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetAddressTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetContactAddresses_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactAddresses" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetContactAddresses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactAddressesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveContactTelenumber_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactTelenumber" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveContactTelenumber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveContactTelenumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetContactTeletypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactTeletypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetContactTeletypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactTeletypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetContactTelenumbers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactTelenumbers" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetContactTelenumbers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactTelenumbersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseContact" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseContactTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseContactTypes" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseContactTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseContactTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseContacts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseContacts" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseContacts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeasePremises_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeasePremises" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeasePremises_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeasePremisesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeasePremises_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeasePremises" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeasePremises_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeasePremisesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseChargeable_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseChargeable" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseChargeable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseChargeableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseChargeables_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseChargeables" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseChargeables_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseChargeablesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseSurety_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseSurety" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseSurety_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseSuretyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseSurety_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseSurety" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseSurety_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseSuretyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseCommission_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseCommission" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_SaveLeaseCommission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveLeaseCommissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseCommission_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseCommission" />
+  </wsdl:message>
+  <wsdl:message name="IIntegrationAPI_GetLeaseCommission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLeaseCommissionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IIntegrationAPI">
+    <wsdl:operation name="SaveBuildingOwner">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingOwner" message="tns:IIntegrationAPI_SaveBuildingOwner_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingOwnerResponse" message="tns:IIntegrationAPI_SaveBuildingOwner_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingOwners">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingOwners" message="tns:IIntegrationAPI_GetBuildingOwners_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingOwnersResponse" message="tns:IIntegrationAPI_GetBuildingOwners_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingShareOwner">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingShareOwner" message="tns:IIntegrationAPI_SaveBuildingShareOwner_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingShareOwnerResponse" message="tns:IIntegrationAPI_SaveBuildingShareOwner_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingShareOwners">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingShareOwners" message="tns:IIntegrationAPI_GetBuildingShareOwners_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingShareOwnersResponse" message="tns:IIntegrationAPI_GetBuildingShareOwners_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveOwnerDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveOwnerDocument" message="tns:IIntegrationAPI_SaveOwnerDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveOwnerDocumentResponse" message="tns:IIntegrationAPI_SaveOwnerDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOwnerDocuments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetOwnerDocuments" message="tns:IIntegrationAPI_GetOwnerDocuments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetOwnerDocumentsResponse" message="tns:IIntegrationAPI_GetOwnerDocuments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocales">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLocales" message="tns:IIntegrationAPI_GetLocales_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLocalesResponse" message="tns:IIntegrationAPI_GetLocales_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOwnerDocumentTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetOwnerDocumentTypes" message="tns:IIntegrationAPI_GetOwnerDocumentTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetOwnerDocumentTypesResponse" message="tns:IIntegrationAPI_GetOwnerDocumentTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePortfolio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SavePortfolio" message="tns:IIntegrationAPI_SavePortfolio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SavePortfolioResponse" message="tns:IIntegrationAPI_SavePortfolio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPortfolios">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetPortfolios" message="tns:IIntegrationAPI_GetPortfolios_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetPortfoliosResponse" message="tns:IIntegrationAPI_GetPortfolios_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuilding">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuilding" message="tns:IIntegrationAPI_SaveBuilding_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingResponse" message="tns:IIntegrationAPI_SaveBuilding_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildings" message="tns:IIntegrationAPI_GetBuildings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingsResponse" message="tns:IIntegrationAPI_GetBuildings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuilding">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuilding" message="tns:IIntegrationAPI_GetBuilding_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingResponse" message="tns:IIntegrationAPI_GetBuilding_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingDocument" message="tns:IIntegrationAPI_SaveBuildingDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingDocumentResponse" message="tns:IIntegrationAPI_SaveBuildingDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingDocuments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingDocuments" message="tns:IIntegrationAPI_GetBuildingDocuments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingDocumentsResponse" message="tns:IIntegrationAPI_GetBuildingDocuments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingDocumentTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingDocumentTypes" message="tns:IIntegrationAPI_GetBuildingDocumentTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingDocumentTypesResponse" message="tns:IIntegrationAPI_GetBuildingDocumentTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingTypes" message="tns:IIntegrationAPI_GetBuildingTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingTypesResponse" message="tns:IIntegrationAPI_GetBuildingTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdminFees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetAdminFees" message="tns:IIntegrationAPI_GetAdminFees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetAdminFeesResponse" message="tns:IIntegrationAPI_GetAdminFees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBranches" message="tns:IIntegrationAPI_GetBranches_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBranchesResponse" message="tns:IIntegrationAPI_GetBranches_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveIPDType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveIPDType" message="tns:IIntegrationAPI_SaveIPDType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveIPDTypeResponse" message="tns:IIntegrationAPI_SaveIPDType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIPDTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetIPDTypes" message="tns:IIntegrationAPI_GetIPDTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetIPDTypesResponse" message="tns:IIntegrationAPI_GetIPDTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveIPDSubType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveIPDSubType" message="tns:IIntegrationAPI_SaveIPDSubType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveIPDSubTypeResponse" message="tns:IIntegrationAPI_SaveIPDSubType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIPDSubTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetIPDSubTypes" message="tns:IIntegrationAPI_GetIPDSubTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetIPDSubTypesResponse" message="tns:IIntegrationAPI_GetIPDSubTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveIPDNode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveIPDNode" message="tns:IIntegrationAPI_SaveIPDNode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveIPDNodeResponse" message="tns:IIntegrationAPI_SaveIPDNode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIPDNodes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetIPDNodes" message="tns:IIntegrationAPI_GetIPDNodes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetIPDNodesResponse" message="tns:IIntegrationAPI_GetIPDNodes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMunicipalities">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetMunicipalities" message="tns:IIntegrationAPI_GetMunicipalities_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetMunicipalitiesResponse" message="tns:IIntegrationAPI_GetMunicipalities_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveMeterReader">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveMeterReader" message="tns:IIntegrationAPI_SaveMeterReader_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveMeterReaderResponse" message="tns:IIntegrationAPI_SaveMeterReader_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMeterReaders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetMeterReaders" message="tns:IIntegrationAPI_GetMeterReaders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetMeterReadersResponse" message="tns:IIntegrationAPI_GetMeterReaders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTenantInvoiceTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetTenantInvoiceTypes" message="tns:IIntegrationAPI_GetTenantInvoiceTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetTenantInvoiceTypesResponse" message="tns:IIntegrationAPI_GetTenantInvoiceTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingTaxIntTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingTaxIntTypes" message="tns:IIntegrationAPI_GetBuildingTaxIntTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingTaxIntTypesResponse" message="tns:IIntegrationAPI_GetBuildingTaxIntTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportingRegions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetReportingRegions" message="tns:IIntegrationAPI_GetReportingRegions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetReportingRegionsResponse" message="tns:IIntegrationAPI_GetReportingRegions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagingAgents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetManagingAgents" message="tns:IIntegrationAPI_GetManagingAgents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetManagingAgentsResponse" message="tns:IIntegrationAPI_GetManagingAgents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetForexCurrencies">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetForexCurrencies" message="tns:IIntegrationAPI_GetForexCurrencies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetForexCurrenciesResponse" message="tns:IIntegrationAPI_GetForexCurrencies_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingChargeType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingChargeType" message="tns:IIntegrationAPI_SaveBuildingChargeType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingChargeTypeResponse" message="tns:IIntegrationAPI_SaveBuildingChargeType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingChargeTypesAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingChargeTypesAll" message="tns:IIntegrationAPI_GetBuildingChargeTypesAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingChargeTypesAllResponse" message="tns:IIntegrationAPI_GetBuildingChargeTypesAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalAccs_Level1">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetGlobalAccs_Level1" message="tns:IIntegrationAPI_GetGlobalAccs_Level1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetGlobalAccs_Level1Response" message="tns:IIntegrationAPI_GetGlobalAccs_Level1_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalAccs_Level2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetGlobalAccs_Level2" message="tns:IIntegrationAPI_GetGlobalAccs_Level2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetGlobalAccs_Level2Response" message="tns:IIntegrationAPI_GetGlobalAccs_Level2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalAcc_Descriptions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetGlobalAcc_Descriptions" message="tns:IIntegrationAPI_GetGlobalAcc_Descriptions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetGlobalAcc_DescriptionsResponse" message="tns:IIntegrationAPI_GetGlobalAcc_Descriptions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingAccount" message="tns:IIntegrationAPI_SaveBuildingAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingAccountResponse" message="tns:IIntegrationAPI_SaveBuildingAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingAcc_GlAccs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingAcc_GlAccs" message="tns:IIntegrationAPI_GetBuildingAcc_GlAccs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingAcc_GlAccsResponse" message="tns:IIntegrationAPI_GetBuildingAcc_GlAccs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetForexConversionTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetForexConversionTypes" message="tns:IIntegrationAPI_GetForexConversionTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetForexConversionTypesResponse" message="tns:IIntegrationAPI_GetForexConversionTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVATIntTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetVATIntTypes" message="tns:IIntegrationAPI_GetVATIntTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetVATIntTypesResponse" message="tns:IIntegrationAPI_GetVATIntTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingSpace">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingSpace" message="tns:IIntegrationAPI_SaveBuildingSpace_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingSpaceResponse" message="tns:IIntegrationAPI_SaveBuildingSpace_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingSpaces">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingSpaces" message="tns:IIntegrationAPI_GetBuildingSpaces_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingSpacesResponse" message="tns:IIntegrationAPI_GetBuildingSpaces_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingSpaceDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingSpaceDetail" message="tns:IIntegrationAPI_SaveBuildingSpaceDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveBuildingSpaceDetailResponse" message="tns:IIntegrationAPI_SaveBuildingSpaceDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingSpaceDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingSpaceDetails" message="tns:IIntegrationAPI_GetBuildingSpaceDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetBuildingSpaceDetailsResponse" message="tns:IIntegrationAPI_GetBuildingSpaceDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPremisesTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetPremisesTypes" message="tns:IIntegrationAPI_GetPremisesTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetPremisesTypesResponse" message="tns:IIntegrationAPI_GetPremisesTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePremises">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SavePremises" message="tns:IIntegrationAPI_SavePremises_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SavePremisesResponse" message="tns:IIntegrationAPI_SavePremises_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPremises">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetPremises" message="tns:IIntegrationAPI_GetPremises_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetPremisesResponse" message="tns:IIntegrationAPI_GetPremises_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntranceTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetEntranceTypes" message="tns:IIntegrationAPI_GetEntranceTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetEntranceTypesResponse" message="tns:IIntegrationAPI_GetEntranceTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveEntrance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveEntrance" message="tns:IIntegrationAPI_SaveEntrance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveEntranceResponse" message="tns:IIntegrationAPI_SaveEntrance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntrances">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetEntrances" message="tns:IIntegrationAPI_GetEntrances_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetEntrancesResponse" message="tns:IIntegrationAPI_GetEntrances_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseHeader">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseHeader" message="tns:IIntegrationAPI_SaveLeaseHeader_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseHeaderResponse" message="tns:IIntegrationAPI_SaveLeaseHeader_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseTypes" message="tns:IIntegrationAPI_GetLeaseTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseTypesResponse" message="tns:IIntegrationAPI_GetLeaseTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeases">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeases" message="tns:IIntegrationAPI_GetLeases_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeasesResponse" message="tns:IIntegrationAPI_GetLeases_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveContactDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveContactDetail" message="tns:IIntegrationAPI_SaveContactDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveContactDetailResponse" message="tns:IIntegrationAPI_SaveContactDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTitles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetTitles" message="tns:IIntegrationAPI_GetTitles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetTitlesResponse" message="tns:IIntegrationAPI_GetTitles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetContactDetail" message="tns:IIntegrationAPI_GetContactDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetContactDetailResponse" message="tns:IIntegrationAPI_GetContactDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveContactAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveContactAddress" message="tns:IIntegrationAPI_SaveContactAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveContactAddressResponse" message="tns:IIntegrationAPI_SaveContactAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetAddressTypes" message="tns:IIntegrationAPI_GetAddressTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetAddressTypesResponse" message="tns:IIntegrationAPI_GetAddressTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactAddresses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetContactAddresses" message="tns:IIntegrationAPI_GetContactAddresses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetContactAddressesResponse" message="tns:IIntegrationAPI_GetContactAddresses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveContactTelenumber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveContactTelenumber" message="tns:IIntegrationAPI_SaveContactTelenumber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveContactTelenumberResponse" message="tns:IIntegrationAPI_SaveContactTelenumber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactTeletypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetContactTeletypes" message="tns:IIntegrationAPI_GetContactTeletypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetContactTeletypesResponse" message="tns:IIntegrationAPI_GetContactTeletypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactTelenumbers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetContactTelenumbers" message="tns:IIntegrationAPI_GetContactTelenumbers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetContactTelenumbersResponse" message="tns:IIntegrationAPI_GetContactTelenumbers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseContact" message="tns:IIntegrationAPI_SaveLeaseContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseContactResponse" message="tns:IIntegrationAPI_SaveLeaseContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseContactTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseContactTypes" message="tns:IIntegrationAPI_GetLeaseContactTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseContactTypesResponse" message="tns:IIntegrationAPI_GetLeaseContactTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseContacts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseContacts" message="tns:IIntegrationAPI_GetLeaseContacts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseContactsResponse" message="tns:IIntegrationAPI_GetLeaseContacts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeasePremises">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeasePremises" message="tns:IIntegrationAPI_SaveLeasePremises_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeasePremisesResponse" message="tns:IIntegrationAPI_SaveLeasePremises_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeasePremises">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeasePremises" message="tns:IIntegrationAPI_GetLeasePremises_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeasePremisesResponse" message="tns:IIntegrationAPI_GetLeasePremises_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseChargeable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseChargeable" message="tns:IIntegrationAPI_SaveLeaseChargeable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseChargeableResponse" message="tns:IIntegrationAPI_SaveLeaseChargeable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseChargeables">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseChargeables" message="tns:IIntegrationAPI_GetLeaseChargeables_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseChargeablesResponse" message="tns:IIntegrationAPI_GetLeaseChargeables_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseSurety">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseSurety" message="tns:IIntegrationAPI_SaveLeaseSurety_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseSuretyResponse" message="tns:IIntegrationAPI_SaveLeaseSurety_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseSurety">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseSurety" message="tns:IIntegrationAPI_GetLeaseSurety_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseSuretyResponse" message="tns:IIntegrationAPI_GetLeaseSurety_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseCommission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseCommission" message="tns:IIntegrationAPI_SaveLeaseCommission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/SaveLeaseCommissionResponse" message="tns:IIntegrationAPI_SaveLeaseCommission_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseCommission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseCommission" message="tns:IIntegrationAPI_GetLeaseCommission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IIntegrationAPI/GetLeaseCommissionResponse" message="tns:IIntegrationAPI_GetLeaseCommission_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IIntegrationAPI" type="tns:IIntegrationAPI">
+    <wsp:PolicyReference URI="#WSHttpBinding_IIntegrationAPI_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveBuildingOwner">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveBuildingOwner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingOwners">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingOwners" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingShareOwner">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveBuildingShareOwner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingShareOwners">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingShareOwners" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveOwnerDocument">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveOwnerDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOwnerDocuments">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetOwnerDocuments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocales">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLocales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOwnerDocumentTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetOwnerDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePortfolio">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SavePortfolio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPortfolios">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetPortfolios" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuilding">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveBuilding" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildings">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuilding">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuilding" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingDocument">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveBuildingDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingDocuments">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingDocuments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingDocumentTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdminFees">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetAdminFees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBranches" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveIPDType">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveIPDType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIPDTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetIPDTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveIPDSubType">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveIPDSubType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIPDSubTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetIPDSubTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveIPDNode">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveIPDNode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIPDNodes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetIPDNodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMunicipalities">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetMunicipalities" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveMeterReader">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveMeterReader" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeterReaders">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetMeterReaders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTenantInvoiceTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetTenantInvoiceTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingTaxIntTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingTaxIntTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportingRegions">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetReportingRegions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagingAgents">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetManagingAgents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetForexCurrencies">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetForexCurrencies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingChargeType">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveBuildingChargeType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingChargeTypesAll">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingChargeTypesAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalAccs_Level1">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetGlobalAccs_Level1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalAccs_Level2">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetGlobalAccs_Level2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalAcc_Descriptions">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetGlobalAcc_Descriptions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingAccount">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveBuildingAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingAcc_GlAccs">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingAcc_GlAccs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetForexConversionTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetForexConversionTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVATIntTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetVATIntTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingSpace">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveBuildingSpace" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingSpaces">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingSpaces" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveBuildingSpaceDetail">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveBuildingSpaceDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuildingSpaceDetails">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetBuildingSpaceDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPremisesTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetPremisesTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePremises">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SavePremises" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPremises">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetPremises" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntranceTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetEntranceTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveEntrance">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveEntrance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntrances">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetEntrances" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseHeader">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveLeaseHeader" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLeaseTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeases">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLeases" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveContactDetail">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveContactDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTitles">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetTitles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactDetail">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetContactDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveContactAddress">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveContactAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetAddressTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactAddresses">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetContactAddresses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveContactTelenumber">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveContactTelenumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactTeletypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetContactTeletypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactTelenumbers">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetContactTelenumbers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseContact">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveLeaseContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseContactTypes">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLeaseContactTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseContacts">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLeaseContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeasePremises">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveLeasePremises" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeasePremises">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLeasePremises" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseChargeable">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveLeaseChargeable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseChargeables">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLeaseChargeables" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseSurety">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveLeaseSurety" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseSurety">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLeaseSurety" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLeaseCommission">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/SaveLeaseCommission" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLeaseCommission">
+      <soap12:operation soapAction="http://tempuri.org/IIntegrationAPI/GetLeaseCommission" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IntegrationAPI">
+    <wsdl:port name="WSHttpBinding_IIntegrationAPI" binding="tns:WSHttpBinding_IIntegrationAPI">
+      <soap12:address location="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc/IntegrationAPI" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc/IntegrationAPI</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

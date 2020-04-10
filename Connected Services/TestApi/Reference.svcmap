@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3e391acc-10ca-467a-acb0-4e91434bcf08" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="IntegrationAPI.xsd" MetadataType="Schema" ID="8201c813-b00c-4e82-aaf8-b4b1b1b05525" SourceId="1" SourceUrl="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?xsd=xsd2" />
+    <MetadataFile FileName="IntegrationAPI.disco" MetadataType="Disco" ID="b2d5c02f-84c6-4630-8f6d-aaa1e0963589" SourceId="1" SourceUrl="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?disco" />
+    <MetadataFile FileName="IntegrationAPI1.xsd" MetadataType="Schema" ID="254ece46-e3d9-48b6-8aff-cbeec26af1d4" SourceId="1" SourceUrl="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?xsd=xsd0" />
+    <MetadataFile FileName="IntegrationAPI2.xsd" MetadataType="Schema" ID="63809b19-e18e-47b7-bbf2-7d6d3c06fa6e" SourceId="1" SourceUrl="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?xsd=xsd3" />
+    <MetadataFile FileName="IntegrationAPI.wsdl" MetadataType="Wsdl" ID="00728c5c-b4d8-4163-9a35-0da06b0ddb57" SourceId="1" SourceUrl="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?wsdl" />
+    <MetadataFile FileName="IntegrationAPI3.xsd" MetadataType="Schema" ID="7a758f05-1213-4194-bbda-a3c80295a5d2" SourceId="1" SourceUrl="https://brollcrestest.brollonline.co.za/wcfPropData/IntegrationAPI.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
